@@ -1,0 +1,1 @@
+This project is a basic expense tracker to train my knowledge and get practice with flutter.
