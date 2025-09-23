@@ -43,3 +43,22 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Android signing keys
+android/app/key.properties
+
+# Android local config
+android/local.properties
+
+# Flutter metadata
+.metadata
+
+# Google Services (Firebase, etc.)
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Environment files
+.env
+
+# Gradle local properties (contém caminho do SDK do Android)
+android/local.properties
