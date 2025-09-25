@@ -8,52 +8,52 @@ const availableCategories = [
   Category(
     id: 'c1',
     title: 'Italian',
-    color: Colors.purple,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c2',
     title: 'Quick & Easy',
-    color: Colors.red,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c3',
     title: 'Hamburgers',
-    color: Colors.orange,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c4',
     title: 'German',
-    color: Colors.amber,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c5',
     title: 'Light & Lovely',
-    color: Colors.blue,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c6',
     title: 'Exotic',
-    color: Colors.green,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c7',
     title: 'Breakfast',
-    color: Colors.lightBlue,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c8',
     title: 'Asian',
-    color: Colors.lightGreen,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c9',
     title: 'French',
-    color: Colors.pink,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
   Category(
     id: 'c10',
     title: 'Summer',
-    color: Colors.teal,
+    color: Color.fromARGB(99, 119, 66, 6),
   ),
 ];
 

@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/meals.dart';
+import 'package:meals/screens/meal_detail.dart';
+import 'package:meals/models/meal.dart';
+import 'package:meals/screens/favorites.dart';
+import 'package:meals/screens/settings.dart';
+import 'package:meals/providers/favorites_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:meals/providers/filters_provider.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -14,7 +21,15 @@ final theme = ThemeData(
 );
 
 void main() {
-  runApp(const App());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => FavoritesProvider()),
+        ChangeNotifierProvider(create: (context) => FiltersProvider()),
+      ],
+      child: const App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -33,6 +48,12 @@ class App extends StatelessWidget {
           final categoryTitle = routeArgs['title']!;
           return MealsScreen(title: categoryTitle, id: categoryId);
         },
+        '/meal-detail': (context) {
+          final meal = ModalRoute.of(context)!.settings.arguments as Meal;
+          return MealDetailScreen(meal: meal);
+        },
+        '/favorites': (context) => const FavoritesScreen(),
+        '/settings': (context) => const SettingsScreen(),
       },
     );
   }
