@@ -11,6 +11,7 @@ class AddPlace extends StatefulWidget {
 
 class _AddPlaceState extends State<AddPlace> {
   final _formKey = GlobalKey<FormState>();
+  final _id = DateTime.now().toString();
   var _title = '';
   final Map<String, String> _place = {};
 
@@ -21,6 +22,7 @@ class _AddPlaceState extends State<AddPlace> {
     }
     _formKey.currentState?.save();
     _place['title'] = _title;
+    _place['id'] = _id;
     Provider.of<PlacesProvider>(
       context,
       listen: false,

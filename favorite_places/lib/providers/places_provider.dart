@@ -10,8 +10,8 @@ class PlacesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removePlace(Map<String, String> place) {
-    _places.remove(place);
+  void removePlace(String id) {
+    _places.removeWhere((place) => place['id'] == id);
     notifyListeners();
   }
 }

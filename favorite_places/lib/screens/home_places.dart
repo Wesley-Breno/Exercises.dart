@@ -10,7 +10,6 @@ class HomePlacesScreen extends StatefulWidget {
 }
 
 class _HomePlacesScreenState extends State<HomePlacesScreen> {
-
   @override
   Widget build(BuildContext context) {
     final placesProvider = Provider.of<PlacesProvider>(context);
@@ -53,14 +52,33 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
       body: ListView.builder(
         itemCount: places.length,
         itemBuilder: (ctx, index) {
-          return ListTile(
-            title: Text(places[index]['title']!),
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                '/place-detail',
-                arguments: places[index],
+          final place = places[index];
+          return Dismissible(
+            key: ValueKey(place['id']),
+            direction: DismissDirection.endToStart,
+            onDismissed: (direction) {
+              placesProvider.removePlace(place['id'] as String);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('${place['title']} dismissed'),
+                  duration: const Duration(seconds: 2),
+                ),
               );
             },
+            background: Container(
+              color: Colors.red,
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.only(right: 20),
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
+            child: ListTile(
+              title: Text(place['title']!),
+              onTap: () {
+                Navigator.of(
+                  context,
+                ).pushNamed('/place-detail', arguments: place);
+              },
+            ),
           );
         },
       ),
