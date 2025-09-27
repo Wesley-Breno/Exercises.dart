@@ -54,13 +54,13 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
         itemBuilder: (ctx, index) {
           final place = places[index];
           return Dismissible(
-            key: ValueKey(place['id']),
+            key: ValueKey(place.id),
             direction: DismissDirection.endToStart,
             onDismissed: (direction) {
-              placesProvider.removePlace(place['id'] as String);
+              placesProvider.removePlace(place.id);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('${place['title']} dismissed'),
+                  content: Text('${place.title} dismissed'),
                   duration: const Duration(seconds: 2),
                 ),
               );
@@ -72,7 +72,7 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
               child: const Icon(Icons.delete, color: Colors.white),
             ),
             child: ListTile(
-              title: Text(place['title']!),
+              title: Text(place.title),
               onTap: () {
                 Navigator.of(
                   context,

@@ -1,6 +1,7 @@
+import 'package:favorite_places/models/place..dart';
+import 'package:favorite_places/providers/places_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:favorite_places/providers/places_provider.dart';
 
 class AddPlace extends StatefulWidget {
   AddPlace({super.key});
@@ -11,9 +12,7 @@ class AddPlace extends StatefulWidget {
 
 class _AddPlaceState extends State<AddPlace> {
   final _formKey = GlobalKey<FormState>();
-  final _id = DateTime.now().toString();
   var _title = '';
-  final Map<String, String> _place = {};
 
   void _saveForm() {
     final isValid = _formKey.currentState?.validate();
@@ -21,12 +20,11 @@ class _AddPlaceState extends State<AddPlace> {
       return;
     }
     _formKey.currentState?.save();
-    _place['title'] = _title;
-    _place['id'] = _id;
+    final newPlace = Place(title: _title);
     Provider.of<PlacesProvider>(
       context,
       listen: false,
-    ).addPlace(_place);
+    ).addPlace(newPlace);
     Navigator.of(context).pop();
   }
 
