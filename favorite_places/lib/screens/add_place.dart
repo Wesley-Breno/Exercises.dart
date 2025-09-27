@@ -21,17 +21,19 @@ class _AddPlaceState extends State<AddPlace> {
     }
     _formKey.currentState?.save();
     final newPlace = Place(title: _title);
-    Provider.of<PlacesProvider>(
-      context,
-      listen: false,
-    ).addPlace(newPlace);
+    Provider.of<PlacesProvider>(context, listen: false).addPlace(newPlace);
     Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add a New Place')),
+      appBar: AppBar(
+        title: Text(
+          'Add a New Place',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
       body: Center(
         child: Form(
           key: _formKey,
@@ -40,8 +42,13 @@ class _AddPlaceState extends State<AddPlace> {
             child: Column(
               children: [
                 TextFormField(
-                  style: const TextStyle(color: Colors.white54),
-                  decoration: InputDecoration(labelText: 'Title', border: OutlineInputBorder()),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(color: Colors.white54),
+                  decoration: InputDecoration(
+                    labelText: 'Title',
+                    border: OutlineInputBorder(),
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a title.';
@@ -57,7 +64,10 @@ class _AddPlaceState extends State<AddPlace> {
                   onPressed: () {
                     _saveForm();
                   },
-                  child: Text('Add Place'),
+                  child: Text(
+                    'Add Place',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                 ),
               ],
             ),

@@ -9,13 +9,13 @@ class PlaceDetailScreen extends StatelessWidget {
     final place = ModalRoute.of(context)!.settings.arguments as Place;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(place.title),
-      ),
+      appBar: AppBar(title: Text(place.title)),
       body: Center(
         child: Text(
           'Details of the selected place',
-          style: TextStyle(fontSize: 18, color: Colors.white54),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: Colors.white54),
         ),
       ),
     );

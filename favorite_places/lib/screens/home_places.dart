@@ -18,7 +18,10 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
     if (places.isEmpty) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Your Places'),
+          title: Text(
+            'Your Places',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.add),
@@ -28,10 +31,12 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
             ),
           ],
         ),
-        body: const Center(
+        body: Center(
           child: Text(
             'No places added yet.',
-            style: TextStyle(fontSize: 18, color: Colors.white54),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: Colors.white54),
           ),
         ),
       );
@@ -39,7 +44,10 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Places'),
+        title: Text(
+          'Your Places',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -60,7 +68,13 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
               placesProvider.removePlace(place.id);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('${place.title} dismissed'),
+                  backgroundColor: Colors.grey[800],
+                  content: Text(
+                    '${place.title} dismissed',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(color: Colors.white54),
+                  ),
                   duration: const Duration(seconds: 2),
                 ),
               );
