@@ -1,7 +1,9 @@
 import 'package:favorite_places/models/place..dart';
 import 'package:favorite_places/providers/places_provider.dart';
+import 'package:favorite_places/widgets/image_input.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 
 class AddPlace extends StatefulWidget {
   AddPlace({super.key});
@@ -13,14 +15,15 @@ class AddPlace extends StatefulWidget {
 class _AddPlaceState extends State<AddPlace> {
   final _formKey = GlobalKey<FormState>();
   var _title = '';
+  File? _selectedImage;
 
   void _saveForm() {
     final isValid = _formKey.currentState?.validate();
-    if (isValid == null || !isValid) {
+    if (isValid == null || !isValid || _selectedImage == null) {
       return;
     }
     _formKey.currentState?.save();
-    final newPlace = Place(title: _title);
+    final newPlace = Place(title: _title, file: _selectedImage!);
     Provider.of<PlacesProvider>(context, listen: false).addPlace(newPlace);
     Navigator.of(context).pop();
   }
@@ -59,7 +62,13 @@ class _AddPlaceState extends State<AddPlace> {
                     _title = value!;
                   },
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
+                ImageInput(
+                  onPickImage: (image) {
+                    _selectedImage = image;
+                  },
+                ),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     _saveForm();

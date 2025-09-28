@@ -15,33 +15,6 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
     final placesProvider = Provider.of<PlacesProvider>(context);
     final places = placesProvider.places;
 
-    if (places.isEmpty) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Your Places',
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/add-place');
-              },
-            ),
-          ],
-        ),
-        body: Center(
-          child: Text(
-            'No places added yet.',
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(color: Colors.white54),
-          ),
-        ),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -57,45 +30,60 @@ class _HomePlacesScreenState extends State<HomePlacesScreen> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: places.length,
-        itemBuilder: (ctx, index) {
-          final place = places[index];
-          return Dismissible(
-            key: ValueKey(place.id),
-            direction: DismissDirection.endToStart,
-            onDismissed: (direction) {
-              placesProvider.removePlace(place.id);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.grey[800],
-                  content: Text(
-                    '${place.title} dismissed',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyLarge?.copyWith(color: Colors.white54),
-                  ),
-                  duration: const Duration(seconds: 2),
-                ),
-              );
-            },
-            background: Container(
-              color: Colors.red,
-              alignment: Alignment.centerRight,
-              padding: const EdgeInsets.only(right: 20),
-              child: const Icon(Icons.delete, color: Colors.white),
-            ),
-            child: ListTile(
-              title: Text(place.title),
-              onTap: () {
-                Navigator.of(
+      body: places.isEmpty
+          ? Center(
+              child: Text(
+                'No places added yet.',
+                style: Theme.of(
                   context,
-                ).pushNamed('/place-detail', arguments: place);
-              },
-            ),
-          );
-        },
-      ),
+                ).textTheme.bodyLarge?.copyWith(color: Colors.white54),
+              ),
+            )
+          : Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+                itemCount: places.length,
+                itemBuilder: (ctx, index) {
+                  final place = places[index];
+                  return Dismissible(
+                    key: ValueKey(place.id),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      placesProvider.removePlace(place.id);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.grey[800],
+                          content: Text(
+                            '${place.title} dismissed',
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(color: Colors.white54),
+                          ),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    },
+                    background: Container(
+                      color: Colors.red,
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.only(right: 20),
+                      child: const Icon(Icons.delete, color: Colors.white),
+                    ),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 26,
+                        backgroundImage: FileImage(place.file),
+                      ),
+                      title: Text(place.title),
+                      onTap: () {
+                        Navigator.of(
+                          context,
+                        ).pushNamed('/place-detail', arguments: place);
+                      },
+                    ),
+                  );
+                },
+              ),
+          ),
     );
   }
 }
