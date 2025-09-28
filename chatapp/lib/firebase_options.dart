@@ -40,6 +40,10 @@ class DefaultFirebaseOptions {
     }
   }
 
+  // These apiKey dont work anymore. They are here just for reference.
+  // You have to generate your own firebase project and get the options
+  // by running the FlutterFire CLI.
+  
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDV7Hzta06H1BCUfPH98pEfyjBW2slrQJ0',
     appId: '1:14464332273:web:2b21d6a364e45afaa4d450',
